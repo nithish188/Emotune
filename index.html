@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion AI Dashboard</title>
+    <meta name="description" content="Real-time facial emotion recognition dashboard using face-api.js">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script defer src="app.js?v=3"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="sidebar glass-panel">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>Emotion<span>AI</span></h1>
+            </div>
+            
+            <div class="stats-container">
+
+
+                <div class="emotions-breakdown">
+                    <h3>Real-time Analytics</h3>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Happy</span> <span id="val-happy">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill happy" id="bar-happy"></div></div>
+                    </div>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Sad</span> <span id="val-sad">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill sad" id="bar-sad"></div></div>
+                    </div>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Angry</span> <span id="val-angry">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill angry" id="bar-angry"></div></div>
+                    </div>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Surprised</span> <span id="val-surprised">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill surprised" id="bar-surprised"></div></div>
+                    </div>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Neutral</span> <span id="val-neutral">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill neutral" id="bar-neutral"></div></div>
+                    </div>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Fearful</span> <span id="val-fearful">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill fearful" id="bar-fearful"></div></div>
+                    </div>
+                    <div class="emotion-bar-container">
+                        <div class="emotion-label"><span>Disgusted</span> <span id="val-disgusted">0%</span></div>
+                        <div class="bar-bg"><div class="bar-fill disgusted" id="bar-disgusted"></div></div>
+                    </div>
+                </div>
+                
+                <div class="stat-card music-card">
+                    <h3>Auto-DJ</h3>
+                    <div id="music-progress" class="music-progress"></div>
+                    <div id="player-container" class="player-container">
+                        <a id="youtube-link" href="#" target="_blank" class="music-btn external-btn" style="display: none; background: #FF0000; text-align: center; text-decoration: none; margin-top: 10px;">
+                            ▶ Play on YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <main class="main-content">
+            <div class="video-container glass-panel">
+                <div class="video-wrapper">
+                    <video id="videoElement" autoplay muted playsinline></video>
+                </div>
+                <div class="scanline"></div>
+                <div class="vignette"></div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
