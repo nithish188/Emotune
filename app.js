@@ -111,16 +111,22 @@ video.addEventListener('playing', () => {
                         // Stop detection
                         detectionStopped = true;
                         
-                        // Inject an explicit YouTube IFrame overlay natively so autoplay and fullscreen permissions are correctly inherited
-                        document.body.innerHTML += `<iframe 
-                            width="100%" height="100%" 
-                            src="${YOUTUBE_URL_MAP[currentStableEmotion]}" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen
-                            style="position:absolute; top:0; left:0; z-index:99999; background:black;">
-                        </iframe>`;
+                        // Streamlit sandboxes execution. Destructive innerHTML operations crash the video buffer.
+                        // We must structurally append the element safely.
+                        const player = document.createElement('iframe');
+                        player.src = YOUTUBE_URL_MAP[currentStableEmotion];
+                        player.setAttribute('allow', 'autoplay; fullscreen;');
+                        player.setAttribute('allowfullscreen', 'true');
+                        player.style.cssText = "position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:999999; background:#000; border:none;";
+                        document.body.appendChild(player);
+                        
+                        // Backup bypass button if Streamlit completely blocks automatic media execution
+                        const backupBtn = document.createElement('a');
+                        backupBtn.href = YOUTUBE_URL_MAP[currentStableEmotion];
+                        backupBtn.target = "_blank";
+                        backupBtn.innerText = "▶ Play on YouTube";
+                        backupBtn.style.cssText = "position:fixed; bottom:30px; left:50%; transform:translateX(-50%); z-index:9999999; background:#ff0000; color:white; padding:15px 30px; border-radius:10px; font-weight:bold; font-size:18px; text-decoration:none; box-shadow: 0 4px 15px rgba(255,0,0,0.5); font-family:sans-serif;";
+                        document.body.appendChild(backupBtn);
                     }
                 } else if (currentlyPlayingEmotion !== currentStableEmotion) {
                     const remaining = Math.ceil((5000 - elapsed) / 1000);
