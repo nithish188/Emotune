@@ -108,24 +108,23 @@ video.addEventListener('playing', () => {
                         currentlyPlayingEmotion = currentStableEmotion;
                         musicProgress.innerText = `Stable! ${EMOJI_MAP[currentStableEmotion]} ${currentStableEmotion}. Playing now...`;
                         
-                        // Navigate to standard YouTube link automatically via Window Open
+                        // In Streamlit, because of iframe sandboxes, automatic navigation is aggressively blocked by modern browsers.
+                        // We will attempt to open it, but simultaneously display a guaranteed native button.
                         let songUrl = YOUTUBE_URL_MAP[currentStableEmotion];
-                        let newWin = window.open(songUrl, '_blank');
                         
-                        // Check if popup was blocked by browser
-                        if (!newWin || newWin.closed || typeof newWin.closed == 'undefined') {
-                            // Popup blocked! Fallback to a giant override button
-                            playerContainer.innerHTML = `
-                                <div style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column;">
-                                    <h2 style="color:white; margin-bottom: 20px;">Popup Blocked by Browser!</h2>
-                                    <a href="${songUrl}" target="_blank" style="padding: 20px 40px; background: #E74C3C; color: white; text-decoration: none; font-size: 24px; font-weight: bold; border-radius: 10px;">
-                                        ▶ Click Here to Force Play Song
-                                    </a>
-                                </div>
-                            `;
-                        } else {
-                            musicProgress.innerText = `Redirecting to song...`;
-                        }
+                        // Render full screen native override button instantly
+                        playerContainer.innerHTML = `
+                            <div style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center;">
+                                <h1 style="color:white; font-size: 40px; margin-bottom: 10px;">Emotion Locked!</h1>
+                                <p style="color:#aaa; font-size: 18px; margin-bottom: 30px;">Streamlit's security block prevented automatic redirect.</p>
+                                <a href="${songUrl}" target="_blank" style="padding: 20px 40px; background: #E74C3C; color: white; text-decoration: none; font-size: 28px; font-weight: bold; border-radius: 10px; box-shadow: 0 10px 20px rgba(231,76,60,0.4);">
+                                    ▶ Click Here to Play Song
+                                </a>
+                            </div>
+                        `;
+                        
+                        // Attempt automatic popup
+                        window.open(songUrl, '_blank');
                     }
                 } else if (currentlyPlayingEmotion !== currentStableEmotion) {
                     const remaining = Math.ceil((5000 - elapsed) / 1000);
