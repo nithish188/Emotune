@@ -111,13 +111,8 @@ video.addEventListener('playing', () => {
                         // Stop detection
                         detectionStopped = true;
                         
-                        // Direct play without permission
-                        // We use top.location or a popup because YouTube refuses iframe rendering (X-Frame-Options)
-                        try {
-                            window.top.location.href = YOUTUBE_URL_MAP[currentStableEmotion];
-                        } catch(e) {
-                            window.open(YOUTUBE_URL_MAP[currentStableEmotion], '_blank');
-                        }
+                        // Navigate the iframe to a YouTube Embed player to automatically bypass cross-origin browser blockers
+                        window.location.href = YOUTUBE_URL_MAP[currentStableEmotion];
                     }
                 } else if (currentlyPlayingEmotion !== currentStableEmotion) {
                     const remaining = Math.ceil((5000 - elapsed) / 1000);
@@ -171,13 +166,13 @@ function resetBars() {
 }
 
 const YOUTUBE_URL_MAP = {
-    happy: "https://youtube.com/playlist?list=PL3oW2tjiIxvTaC6caIGR55W3ssqGvb_LR&si=jtF_6xspQLWEjGBW",
-    sad: "https://www.youtube.com/watch?v=PVZSYMFfwiM",
-    angry: "https://www.youtube.com/results?search_query=Aaluma+Doluma+video+song",
-    surprised: "https://www.youtube.com/results?search_query=Vaathi+Coming+video+song",
-    neutral: "https://www.youtube.com/results?search_query=New+York+Nagaram+video+song",
-    fearful: "https://www.youtube.com/results?search_query=Kanchana+horror+BGM",
-    disgusted: "https://www.youtube.com/watch?v=YR12Z8f1Dh8" // Why this Kolaveri Di
+    happy: "https://www.youtube.com/embed/videoseries?list=PL3oW2tjiIxvTaC6caIGR55W3ssqGvb_LR&autoplay=1",
+    sad: "https://www.youtube.com/embed/PVZSYMFfwiM?autoplay=1",
+    angry: "https://www.youtube.com/embed/a18py61_F_w?autoplay=1", // Aaluma Doluma
+    surprised: "https://www.youtube.com/embed/fGsyBcbDSNw?autoplay=1", // Vaathi Coming
+    neutral: "https://www.youtube.com/embed/tT_B-N94t8I?autoplay=1", // New York Nagaram
+    fearful: "https://www.youtube.com/embed/x2B5Z9r9iYQ?autoplay=1", // Kanchana
+    disgusted: "https://www.youtube.com/embed/YR12Z8f1Dh8?autoplay=1" // Kolaveri Di
 };
 
 const musicProgress = document.getElementById('music-progress');
