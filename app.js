@@ -112,7 +112,12 @@ video.addEventListener('playing', () => {
                         detectionStopped = true;
                         
                         // Direct play without permission
-                        window.location.href = YOUTUBE_URL_MAP[currentStableEmotion];
+                        // We use top.location or a popup because YouTube refuses iframe rendering (X-Frame-Options)
+                        try {
+                            window.top.location.href = YOUTUBE_URL_MAP[currentStableEmotion];
+                        } catch(e) {
+                            window.open(YOUTUBE_URL_MAP[currentStableEmotion], '_blank');
+                        }
                     }
                 } else if (currentlyPlayingEmotion !== currentStableEmotion) {
                     const remaining = Math.ceil((5000 - elapsed) / 1000);
