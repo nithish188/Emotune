@@ -183,10 +183,10 @@ const YOUTUBE_URL_MAP = {
     happy: "https://www.youtube.com/embed/videoseries?list=PL3oW2tjiIxvTaC6caIGR55W3ssqGvb_LR&autoplay=1",
     sad: "https://www.youtube.com/embed/PVZSYMFfwiM?autoplay=1",
     angry: "https://www.youtube.com/embed/a18py61_F_w?autoplay=1", // Aaluma Doluma
-    surprised: "https://www.youtube.com/embed/fGsyBcbDSNw?autoplay=1", // Vaathi Coming
-    neutral: "https://www.youtube.com/embed/tT_B-N94t8I?autoplay=1", // New York Nagaram
-    fearful: "https://www.youtube.com/embed/x2B5Z9r9iYQ?autoplay=1", // Kanchana
-    disgusted: "https://www.youtube.com/embed/YR12Z8f1Dh8?autoplay=1" // Kolaveri Di
+    surprised: "https://www.youtube.com/embed/067FqlIxEWA?autoplay=1", // Custom requested Tamil song
+    neutral: "https://www.youtube.com/embed/6LD30ChPsSs?autoplay=1", // Custom requested Tamil song
+    fearful: "https://www.youtube.com/embed/0VRuesp4UYk?autoplay=1", // Custom requested song
+    disgusted: "https://www.youtube.com/embed/C3az3JlJvbg?autoplay=1" // Custom requested song
 };
 
 const musicProgress = document.getElementById('music-progress');
